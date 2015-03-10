@@ -1,0 +1,1 @@
+include ':fullCamera', ':ecogallery', ':mediaChooserlib'

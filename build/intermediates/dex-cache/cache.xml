@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Applications/AppDev/adt-bundle/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-bb0fd9ad7e6e752a4f00b7202c3a214d9dcd7e75.jar" />
+    </item>
+    <item
+        jar="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/exploded-aar/FullCamAndroid/ecogallery/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="f1853fe7e437275ed991c0dfe589d644facc2cb0">
+        <dex dex="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/pre-dexed/debug/classes-978916af9388876f6db4f6d4be74b1ef18b7525b.jar" />
+    </item>
+    <item
+        jar="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-419f4714db5bc6a9b3f139cd6e2b52f5fac87a48.jar" />
+    </item>
+    <item
+        jar="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/pre-dexed/debug/classes-1a51b99013eeb727ec6409e1f7d0735792618a85.jar" />
+    </item>
+    <item
+        jar="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/exploded-aar/FullCamAndroid/mediaChooserlib/unspecified/libs/picasso-2.2.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="74137f8d9aac26dd9463efe32271f2be8d41cda9">
+        <dex dex="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/pre-dexed/debug/picasso-2.2.0-602502b481d6246b00741ed57e31308fdee42acb.jar" />
+    </item>
+    <item
+        jar="/Users/sidferreira/Projects/Clappix/FullCamAndroid/libs/isoparser-1.0-RC-27.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="ea49bd60a293175b9a0c27c3ab5a6f1e42e7b3c9">
+        <dex dex="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/pre-dexed/debug/isoparser-1.0-RC-27-1dfa014c947a87649aa17314c812f3083fcde790.jar" />
+    </item>
+    <item
+        jar="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/exploded-aar/FullCamAndroid/mediaChooserlib/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="92341dac36c9cd4fc393ca2a78a2d5077f899547">
+        <dex dex="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/pre-dexed/debug/classes-ad50dce5659bc78ddc1fb1dabdeeb450c4d3b35c.jar" />
+    </item>
+    <item
+        jar="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/pre-dexed/debug/classes-d7c41b8e8a32733dff66115aa3268f1ab90ee6fb.jar" />
+    </item>
+    <item
+        jar="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/libs/aspectjrt-1.7.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="a1efcd30e7c12f0c0d5b0df412c7304c735035ed">
+        <dex dex="/Users/sidferreira/Projects/Clappix/FullCamAndroid/fullCamera/build/intermediates/pre-dexed/debug/aspectjrt-1.7.3-c2e915badf1019bb74c88e4c2218779c9a6c2cff.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="full_camera">Full Camera Dev</string>
+    <string name="description_switch_camera">Switch Camera</string>
+    <string name="description_switch_flash">Switch Flash</string>
+    <string name="description_back">Back</string>
+    <string name="description_next">Next Step</string>
+    <string name="description_cancel">Cancel</string>
+
+    <color name="red">#FF0000</color>
+
+</resources>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="1_isoparser-1.0-RC-27">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/isoparser-1.0-RC-27.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
