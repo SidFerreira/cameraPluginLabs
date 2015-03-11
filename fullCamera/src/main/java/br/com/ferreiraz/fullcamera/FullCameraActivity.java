@@ -51,7 +51,7 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
 
     @SuppressWarnings("deprecation")
     private Camera mCamera;
-    private SurfaceView mCameraPreviewSurface;
+    private CameraPreview mCameraPreviewSurface;
     private MediaRecorder mMediaRecorder;
     private boolean isRecording = false;
     private boolean mPagerSourcesRollingBack = false;
@@ -118,6 +118,13 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
     private String                      stringDeleteAllVideos   = "This will cause your video to be removed. Are you sure?";
     private String                      stringProcessingVideos  = "Processing video";
     private String                      stringAppFolder         = "fullcam";
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        startCamera();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -432,6 +439,7 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
 
     protected void stopCamera() {
         if(mCameraPreviewSurface != null) {
+            mCameraPreviewSurface.removeCallback();
             if(mPreviewHolder != null) {
                 mPreviewHolder.removeView(mCameraPreviewSurface);
             }
@@ -441,12 +449,7 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
             }
             mCameraPreviewSurface = null;
         }
-        if(mCamera != null) {
-            mCamera.stopPreview();
-//            mCamera.setPreviewCallback(null);
-            mCamera.release();
-            mCamera = null;
-        }
+        releaseCamera();
     }
 
     protected void switchCameras() {
@@ -515,6 +518,7 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
     }
 
     protected void finishWithItems() {
+        stopCamera();
         ArrayList<String> items = new ArrayList<String>();
         this.setResult(Activity.RESULT_OK, this.getIntent());
         String source_tag = (String) mPagerSources.getSelectedView().getTag();
@@ -549,6 +553,7 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
 
 
     protected void finishWithoutItems() {
+        stopCamera();
         this.setResult(Activity.RESULT_CANCELED, this.getIntent());
         this.finish();
     }
@@ -1106,7 +1111,7 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
                 });
             }
 //
-            mCameraPreviewSurface = new CameraPreview(this, mCamera, mPreviewHolder.getHeight(), mPreviewHolder.getHeight()); //0, 0); //
+            mCameraPreviewSurface = new CameraPreview(this, mCamera, 0, 0); //mPreviewHolder.getHeight(), mPreviewHolder.getHeight()); //
             RelativeLayout.LayoutParams layoutParamsForPreviewSurface = (RelativeLayout.LayoutParams) mCameraPreviewSurface.getLayoutParams();
             if(layoutParamsForPreviewSurface == null)
                 layoutParamsForPreviewSurface = new RelativeLayout.LayoutParams(mCamera.getParameters().getPreviewSize().width, mCamera.getParameters().getPreviewSize().height);
@@ -1125,7 +1130,7 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
     protected void onPause() {
         super.onPause();
         releaseMediaRecorder();       // if you are using MediaRecorder, release it first
-        releaseCamera();              // release the camera immediately on pause event
+        stopCamera();
     }
 
     private void releaseMediaRecorder(){
@@ -1139,6 +1144,8 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
 
     private void releaseCamera(){
         if (mCamera != null){
+            mCamera.stopPreview();
+            mCamera.setPreviewCallback(null);
             mCamera.release();        // release the camera for other applications
             mCamera = null;
         }
