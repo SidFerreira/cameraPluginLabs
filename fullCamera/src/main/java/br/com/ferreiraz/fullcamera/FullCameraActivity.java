@@ -1101,32 +1101,17 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
                     }
                 });
             }
-// mPreviewHolder.getWidth(), mPreviewHolder.getHeight()
-            mCameraPreviewSurface = new CameraPreview(this, mCamera, 0, 0);
+//
+            mCameraPreviewSurface = new CameraPreview(this, mCamera, mPreviewHolder.getHeight(), mPreviewHolder.getHeight()); //0, 0); //
             RelativeLayout.LayoutParams layoutParamsForPreviewSurface = (RelativeLayout.LayoutParams) mCameraPreviewSurface.getLayoutParams();
             if(layoutParamsForPreviewSurface == null)
                 layoutParamsForPreviewSurface = new RelativeLayout.LayoutParams(mCamera.getParameters().getPreviewSize().width, mCamera.getParameters().getPreviewSize().height);
-            Camera.Size previewSize = mCamera.getParameters().getPreviewSize();
 
-            final int rotation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
-
-//            params.height = previewSize.width;
-//            params.width = previewSize.height;
-            //Fix this code to respect screen size.
-            if(rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
-
-            } else {
-                //layoutParamsForPreviewSurface.height = previewSize.width;
-                //layoutParamsForPreviewSurface.width = previewSize.height;
-            }
             layoutParamsForPreviewSurface.addRule(RelativeLayout.CENTER_HORIZONTAL);
             layoutParamsForPreviewSurface.addRule(RelativeLayout.CENTER_VERTICAL);
             layoutParamsForPreviewSurface.setMargins(0, 0, 0, 0);
-//            mCameraPreviewSurface.setLayoutParams(layoutParamsForPreviewSurface);
+            mCameraPreviewSurface.setLayoutParams(layoutParamsForPreviewSurface);
             mPreviewHolder.addView(mCameraPreviewSurface, 0);
-            logMessage("PreviewSize: " + previewSize.width + "x" + previewSize.height);
-            logMessage("mPreviewHolder: " + mPreviewHolder.getWidth() + "x" + mPreviewHolder.getHeight());
-            logMessage("mCameraPreviewSurface: " + mCameraPreviewSurface.getMeasuredWidth() + "x" + mCameraPreviewSurface.getMeasuredHeight());
             currentFlashMode = 1; //AUTO
             flashSet();
         }

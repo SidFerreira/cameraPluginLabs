@@ -52,8 +52,7 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: br.com.ferreiraz.fullcamera" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Generic Camera" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8737c484-791e-40bc-89e2-3051d8816199" name="Default" comment="" />
@@ -86,8 +85,8 @@
       <file leaf-file-name="FullCameraActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/FullCameraActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43492064" vertical-offset="15703" max-vertical-offset="20730">
-              <caret line="1124" column="4" selection-start-line="1124" selection-start-column="4" selection-end-line="1124" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.33123028" vertical-offset="15465" max-vertical-offset="20505">
+              <caret line="1106" column="53" selection-start-line="1106" selection-start-column="53" selection-end-line="1106" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1447#1479#0" expanded="true" />
@@ -99,8 +98,8 @@
       <file leaf-file-name="CameraPreview.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/CameraPreview.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="2400">
-              <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1221" max-vertical-offset="2400">
+              <caret line="25" column="2" selection-start-line="25" selection-start-column="2" selection-end-line="25" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -2644,9 +2643,9 @@
         <option value="$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/preview/CameraPreview.java" />
         <option value="$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/preview/CameraPreviewFroyo.java" />
         <option value="$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/preview/CameraPreviewGingerbread.java" />
+        <option value="$PROJECT_DIR$/fullCamera/src/main/res/layout/activity_full_cam.xml" />
         <option value="$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/CameraPreview.java" />
         <option value="$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/FullCameraActivity.java" />
-        <option value="$PROJECT_DIR$/fullCamera/src/main/res/layout/activity_full_cam.xml" />
       </list>
     </option>
   </component>
@@ -3233,14 +3232,14 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1602289" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.4706724" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6050198" sideWeight="0.64520746" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989432" sideWeight="0.64520746" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4029062" sideWeight="0.4134478" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4029062" sideWeight="0.4134478" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35006604" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5297226" sideWeight="0.44206008" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4927345" sideWeight="0.44206008" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13590844" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22889842" sideWeight="0.3712021" order="3" side_tool="true" content_ui="tabs" />
@@ -3330,7 +3329,7 @@
           <option name="timeStamp" value="165" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="166" />
+      <option name="time" value="172" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -3671,14 +3670,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/CameraPreview.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="2400">
-          <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fullCamera/src/main/res/layout/activity_full_cam.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -3690,10 +3681,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/CameraPreview.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1221" max-vertical-offset="2400">
+          <caret line="25" column="2" selection-start-line="25" selection-start-column="2" selection-end-line="25" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fullCamera/src/main/java/br/com/ferreiraz/fullcamera/FullCameraActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43492064" vertical-offset="15703" max-vertical-offset="20730">
-          <caret line="1124" column="4" selection-start-line="1124" selection-start-column="4" selection-end-line="1124" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.33123028" vertical-offset="15465" max-vertical-offset="20505">
+          <caret line="1106" column="53" selection-start-line="1106" selection-start-column="53" selection-end-line="1106" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1447#1479#0" expanded="true" />

@@ -23,7 +23,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // underlying surface is created and destroyed.
         mHolder = getHolder();
         if(width > 0 && height > 0) {
-            mHolder.setFixedSize(width, height);
+//            mHolder.setFixedSize(width, height);
         }
 
         mHolder.addCallback(this);
@@ -67,8 +67,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 //        Log.d("TARGET", "" + w + "x" + h);
 
         for (Camera.Size size : sizes) {
-//            Log.d("SIZE", "" + size.width + "x" + size.height);
             double ratio = (double) size.width / size.height;
+            Log.d(TAG, "Size: " + size.width + "x" + size.height + " Ratio: " + ratio + "/" + targetRatio);
             if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE) continue;
             if (Math.abs(size.height - targetHeight) < minDiff) {
                 optimalSize = size;
@@ -123,9 +123,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                 isPortrait = true;
                 mCamera.setDisplayOrientation(90);
                 cameraParameters.setRotation(90);
-                int t = holderWidth;
+/*                int t = holderWidth;
                 holderWidth = holderHeight;
-                holderHeight = t;
+                holderHeight = t;*/
                 break;
         }
 
@@ -142,7 +142,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 //            if(isPortrait)
 //                cameraParameters.setPreviewSize(smaller.height, smaller.width);
 //            else
-                cameraParameters.setPreviewSize(smaller.width, smaller.height);
+//                cameraParameters.setPreviewSize(smaller.width, smaller.height);
         }
 
         // set preview size and make any resize, rotate or
