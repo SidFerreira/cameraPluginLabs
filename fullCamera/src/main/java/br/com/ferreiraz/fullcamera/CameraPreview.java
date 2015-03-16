@@ -3,6 +3,7 @@ package br.com.ferreiraz.fullcamera;
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
+import android.os.Build;
 import android.util.Log;
 import android.view.*;
 
@@ -92,7 +93,72 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         return optimalSize;
     }
 
+    public void resetPreview(int holderWidth, int holderHeight) {
+        if (mHolder.getSurface() == null){
+            return;
+        }
+
+        try {
+            mCamera.stopPreview();
+        } catch (Exception e){
+            // ignore: tried to stop a non-existent preview
+            Log.d(TAG, "Error stoping camera preview: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        Camera.Parameters cameraParameters = mCamera.getParameters();
+        boolean isPortrait = false;
+        final int rotation = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+        switch (rotation) {
+            case Surface.ROTATION_90:
+                mCamera.setDisplayOrientation(0);
+                cameraParameters.setRotation(0);
+                break;
+            case Surface.ROTATION_270:
+                mCamera.setDisplayOrientation(180);
+                cameraParameters.setRotation(180);
+                break;
+            default:
+                isPortrait = true;
+                mCamera.setDisplayOrientation(90);
+                cameraParameters.setRotation(90);
+                int t = holderWidth;
+                holderWidth = holderHeight;
+                holderHeight = t;
+                break;
+        }
+
+        List<Size> sizes = null;
+
+        int sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk > Build.VERSION_CODES.HONEYCOMB) {
+            sizes = cameraParameters.getSupportedVideoSizes();
+        }
+
+        if(sizes == null) {
+            sizes = cameraParameters.getSupportedPreviewSizes();
+        }
+        if (sizes != null) {
+            sizes = cameraParameters.getSupportedPreviewSizes();
+            Size smaller = getOptimalPreviewSize(sizes, holderWidth, holderHeight);
+            cameraParameters.setPreviewSize(smaller.width, smaller.height);
+        }
+
+        try {
+            mCamera.setPreviewDisplay(mHolder);
+            mCamera.setParameters(cameraParameters);
+            mCamera.startPreview();
+
+        } catch (Exception e){
+            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+        }
+    }
+
     public void surfaceChanged(SurfaceHolder holder, int pixelFormat, int holderWidth, int holderHeight) {
+
+    }
+
+    public void surfaceChanged2(SurfaceHolder holder, int pixelFormat, int holderWidth, int holderHeight) {
         // If your preview can change or rotate, take care of those events here.
         // Make sure to stop the preview before resizing or reformatting it.
         Log.d(TAG, "surfaceChanged " + holderWidth + "x" + holderHeight);
@@ -111,7 +177,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         }
 
         Camera.Parameters cameraParameters = mCamera.getParameters();
-
         boolean isPortrait = false;
         final int rotation = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
         switch (rotation) {
@@ -133,8 +198,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                 break;
         }
 
-        if (cameraParameters.getSupportedPictureSizes() != null) {
-            List<Size> sizes = cameraParameters.getSupportedPictureSizes();
+        List<Size> sizes = cameraParameters.getSupportedVideoSizes();
+        if(sizes == null) {
+            sizes = cameraParameters.getSupportedPreviewSizes();
+        }
+        if (sizes != null) {
+            sizes = cameraParameters.getSupportedPreviewSizes();
             Size smaller = getOptimalPreviewSize(sizes, holderWidth, holderHeight);
 
 /*            float relationHeight = (float) largest.height / holderHeight;
@@ -146,7 +215,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 //            if(isPortrait)
 //                cameraParameters.setPreviewSize(smaller.height, smaller.width);
 //            else
-//                cameraParameters.setPreviewSize(smaller.width, smaller.height);
+                cameraParameters.setPreviewSize(smaller.width, smaller.height);
         }
 
         // set preview size and make any resize, rotate or
@@ -155,12 +224,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // start preview with new settings
         try {
             mCamera.setPreviewDisplay(mHolder);
-//            mCamera.setParameters(cameraParameters);
+            mCamera.setParameters(cameraParameters);
             mCamera.startPreview();
 
         } catch (Exception e){
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 }

@@ -1112,9 +1112,10 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
             }
 //
             mCameraPreviewSurface = new CameraPreview(this, mCamera, 0, 0); //mPreviewHolder.getHeight(), mPreviewHolder.getHeight()); //
+            mCameraPreviewSurface.resetPreview(mPreviewHolder.getWidth(), mPreviewHolder.getHeight());
             RelativeLayout.LayoutParams layoutParamsForPreviewSurface = (RelativeLayout.LayoutParams) mCameraPreviewSurface.getLayoutParams();
             if(layoutParamsForPreviewSurface == null)
-                layoutParamsForPreviewSurface = new RelativeLayout.LayoutParams(mCamera.getParameters().getPreviewSize().width, mCamera.getParameters().getPreviewSize().height);
+                layoutParamsForPreviewSurface = new RelativeLayout.LayoutParams(mPreviewHolder.getWidth(), mPreviewHolder.getHeight());
 
             layoutParamsForPreviewSurface.addRule(RelativeLayout.CENTER_HORIZONTAL);
             layoutParamsForPreviewSurface.addRule(RelativeLayout.CENTER_VERTICAL);
