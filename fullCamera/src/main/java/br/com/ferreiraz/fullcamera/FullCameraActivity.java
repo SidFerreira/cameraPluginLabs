@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -23,16 +24,9 @@ import android.view.*;
 import android.widget.*;
 
 import java.io.*;
-import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.coremedia.iso.boxes.Container;
-import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.Track;
-import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
-import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
-import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.learnncode.mediachooser.activity.HomeFragmentActivity;
 import com.learnncode.mediachooser.fragment.ImageFragment;
 import com.learnncode.mediachooser.fragment.VideoFragment;
@@ -65,7 +59,7 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
     private EcoGallery mPagerSources;
     private SourcesAdapter              pagerSourcesAdapter;
     private EcoGallery mCarouselPhotos;
-    private PhotosAdapter               pagerPhotosAdapter;
+    private FzPhotosAdapter pagerPhotosAdapter;
 
     private ArrayList<ResultClass> mPagerPhotosItems;
     private ArrayList<ResultFile> mVideosItems = new ArrayList<ResultFile>();
@@ -220,7 +214,23 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
             onClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickProxy((ImageButton) v);
+                int id = v.getId();
+                String tag = (String) v.getTag();
+
+                if(id == R.id.next)
+                    finishWithItems();
+                else if(id == R.id.back)
+                    finishWithoutItems();
+                else if(id == R.id.switchCamera)
+                    switchCameras();
+                else if(id == R.id.flashOn || id == R.id.flashOff || id == R.id.flashAuto)
+                    flashSwitch();
+                else if(tag.equals(BUTTON_SOURCE_PHOTO))
+                    capturePicture();
+                else if(tag.equals(BUTTON_SOURCE_VIDEO))
+                    captureVideo();
+                else if(id == R.id.cancel)
+                    dropVideosDialog();
                 }
             };
             buttonSwitchCamera.setOnClickListener(onClickListener);
@@ -238,11 +248,19 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
         }
     }
 
+    private Bitmap getBitmapFromAsset(String strName) throws IOException
+    {
+        AssetManager assetManager = getAssets();
+        InputStream istr = assetManager.open(strName);
+        Bitmap bitmap = BitmapFactory.decodeStream(istr);
+        return bitmap;
+    }
+
     private void initPagerPhotos() {
         mCarouselPhotos = (EcoGallery) findViewById(R.id.pagerPhotos);
         if(mPagerPhotosItems == null) {
             mPagerPhotosItems = new ArrayList<ResultClass>();
-            pagerPhotosAdapter = new PhotosAdapter(this, mPagerPhotosItems);
+            pagerPhotosAdapter = new FzPhotosAdapter(mPagerPhotosItems, this);
             mCarouselPhotos.setAdapter(pagerPhotosAdapter);
             mCarouselPhotos.setSpacing(10);
             mCarouselPhotos.setOnItemClickListener(new EcoGalleryAdapterView.OnItemClickListener() {
@@ -344,14 +362,6 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
 
                     if (maySwitchButtons) {
                         switchSourceButtons(view.getTag());
-
-                        if (view.getTag() == BUTTON_SOURCE_PHOTO || view.getTag() == BUTTON_SOURCE_VIDEO) {
-                            showPreview();
-                            hideGallery();
-                        } else {
-                            hidePreview();
-                            showGallery();
-                        }
                     }
                     mPagerSourcesRollingBack = false;
                 }
@@ -375,33 +385,26 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
     }
 
     protected void switchSourceButtons(Object viewTag) {
-        if (viewTag == BUTTON_SOURCE_GALLERY) {
-            buttonSourceGallery.setClickable(true);
-            buttonSourceGallery.setEnabled(true);
 
-            buttonSourcePhoto.setClickable(false);
-            buttonSourcePhoto.setEnabled(false);
+        boolean isGallery = (viewTag == BUTTON_SOURCE_GALLERY);
+        boolean isPhoto = (viewTag == BUTTON_SOURCE_PHOTO);
+        boolean isVideo = (viewTag == BUTTON_SOURCE_VIDEO);
 
-            buttonSourceVideo.setClickable(false);
-            buttonSourceVideo.setEnabled(false);
-        } else if (viewTag == BUTTON_SOURCE_PHOTO) {
-            buttonSourceGallery.setClickable(false);
-            buttonSourceGallery.setEnabled(false);
+        buttonSourceGallery.setClickable(isGallery);
+        buttonSourceGallery.setEnabled(isGallery);
 
-            buttonSourcePhoto.setClickable(true);
-            buttonSourcePhoto.setEnabled(true);
+        buttonSourcePhoto.setClickable(isPhoto);
+        buttonSourcePhoto.setEnabled(isPhoto);
 
-            buttonSourceVideo.setClickable(false);
-            buttonSourceVideo.setEnabled(false);
-        } else if (viewTag == BUTTON_SOURCE_VIDEO) {
-            buttonSourceGallery.setClickable(false);
-            buttonSourceGallery.setEnabled(false);
+        buttonSourceVideo.setClickable(isVideo);
+        buttonSourceVideo.setEnabled(isVideo);
 
-            buttonSourcePhoto.setClickable(false);
-            buttonSourcePhoto.setEnabled(false);
-
-            buttonSourceVideo.setClickable(true);
-            buttonSourceVideo.setEnabled(true);
+        if (isPhoto || isVideo) {
+            showPreview();
+            hideGallery();
+        } else {
+            hidePreview();
+            showGallery();
         }
     }
 
@@ -411,27 +414,6 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
             return false;
         }
         return true;
-    }
-
-
-    protected void onClickProxy(ImageButton v) {
-        int id = v.getId();
-        String tag = (String) v.getTag();
-
-        if(id == R.id.next)
-            finishWithItems();
-        else if(id == R.id.back)
-            finishWithoutItems();
-        else if(id == R.id.switchCamera)
-            switchCameras();
-        else if(id == R.id.flashOn || id == R.id.flashOff || id == R.id.flashAuto)
-            flashSwitch();
-        else if(tag.equals(BUTTON_SOURCE_PHOTO))
-            capturePicture();
-        else if(tag.equals(BUTTON_SOURCE_VIDEO))
-            captureVideo();
-        else if(id == R.id.cancel)
-            dropVideosDialog();
     }
     //endregion
 
@@ -667,117 +649,30 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
     protected void processVideo() {
         progressDialog = ProgressDialog.show(this, "", stringProcessingVideos, true);
         final Handler handler = new Handler();
+        final File finalFile = getOutputMediaFile(MEDIA_TYPE_MERGED_VIDEO);
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-
-                List<Track> videoTracks = new LinkedList<Track>();
-                List<Track> audioTracks = new LinkedList<Track>();
-
-                Movie[] inMovies = new Movie[mVideosItems.size()];
-                for (int i = 0; i < mVideosItems.size(); i++) {
-                    try {
-                        inMovies[i] = MovieCreator.build(mVideosItems.get(i).getFile().getAbsolutePath());
-                        for (Track t : inMovies[i].getTracks()) {
-                            if (t.getHandler().equals("soun")) {
-                                audioTracks.add(t);
-                            }
-                            if (t.getHandler().equals("vide")) {
-                                videoTracks.add(t);
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                dropVideos(true);
+                progressDialog.dismiss();
+                finishWithItems();
+                if(shouldSaveOnGallery) {
+                    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    Uri contentUri = Uri.fromFile(finalFile);
+                    mediaScanIntent.setData(contentUri);
+                    self.sendBroadcast(mediaScanIntent);
                 }
-
-                try {
-                    Movie result = new Movie();
-
-                    if (audioTracks.size() > 0) {
-                        result.addTrack(new AppendTrack(audioTracks.toArray(new Track[audioTracks.size()])));
-                    }
-                    if (videoTracks.size() > 0) {
-                        result.addTrack(new AppendTrack(videoTracks.toArray(new Track[videoTracks.size()])));
-                    }
-
-                    Container out = new DefaultMp4Builder().build(result);
-
-                    File ret = getOutputMediaFile(MEDIA_TYPE_MERGED_VIDEO);
-
-                    FileChannel fc = new RandomAccessFile(ret.getAbsolutePath(), "rw").getChannel();
-                    out.writeContainer(fc);
-                    fc.close();
-                    logMessage("ProcessVideo RET" + ret.getAbsolutePath() + " >>> "  + ret.length());;
-                    if(shouldSaveOnGallery) {
-                        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                        Uri contentUri = Uri.fromFile(ret);
-                        mediaScanIntent.setData(contentUri);
-                        self.sendBroadcast(mediaScanIntent);
-                    }
-                    mVideosItems.add(new ResultFile(ret));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        dropVideos(true);
-                        progressDialog.dismiss();
-                        finishWithItems();
-                    }
-                });
             }
         };
+        FzVideoMerge videoMergeRunnable = new FzVideoMerge(mVideosItems, finalFile, handler, runnable);
 
-        Thread thread = new Thread(runnable);
+        Thread thread = new Thread(videoMergeRunnable);
         thread.start();
     }
 
     //endregion
 
     //region Adapters
-
-    private class PhotosAdapter extends BaseAdapter {
-        private Context context;
-        private List<ResultClass> items;
-
-        PhotosAdapter(Context context, List<ResultClass> items) {
-            this.context = context;
-            this.items = items;
-        }
-
-        public int getCount() {
-            return (items != null) ? items.size() : 0;
-        }
-
-        public Object getItem(int position) {
-            return items.get(position).scaled;
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView;
-            if(convertView == null) {
-                imageView = new ImageView(context);
-                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                imageView.setAdjustViewBounds(true);
-                EcoGallery.LayoutParams layoutParams = new EcoGallery.LayoutParams(EcoGallery.LayoutParams.WRAP_CONTENT, EcoGallery.LayoutParams.MATCH_PARENT);
-                imageView.setLayoutParams(layoutParams);
-            } else {
-                imageView = (ImageView) convertView;
-            }
-            imageView.setImageBitmap(items.get(position).getScaled());
-
-            return imageView;
-        }
-
-    }
 
     private class SourcesAdapter extends BaseAdapter {
         private Context context;
@@ -1375,7 +1270,7 @@ public class FullCameraActivity extends HomeFragmentActivity implements EcoGalle
             try {
                 mMediaRecorder.stop();  // stop the recording
             } catch (Exception e) {
-                logMessage("CaptureVideo" + e.getMessage());;
+                logMessage("CaptureVideo" + e.getMessage());
             }
             releaseMediaRecorder(); // release the MediaRecorder object
             mCamera.lock();         // take camera access back from MediaRecorder

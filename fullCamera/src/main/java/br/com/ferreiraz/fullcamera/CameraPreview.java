@@ -127,9 +127,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                 isPortrait = true;
                 mCamera.setDisplayOrientation(90);
                 cameraParameters.setRotation(90);
-/*                int t = holderWidth;
-                holderWidth = holderHeight;
-                holderHeight = t;*/
                 break;
         }
 
@@ -146,7 +143,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 //            if(isPortrait)
 //                cameraParameters.setPreviewSize(smaller.height, smaller.width);
 //            else
-//                cameraParameters.setPreviewSize(smaller.width, smaller.height);
+                cameraParameters.setPreviewSize(smaller.width, smaller.height);
         }
 
         // set preview size and make any resize, rotate or
@@ -154,8 +151,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         // start preview with new settings
         try {
+            mCamera.setParameters(cameraParameters);
             mCamera.setPreviewDisplay(mHolder);
-//            mCamera.setParameters(cameraParameters);
             mCamera.startPreview();
 
         } catch (Exception e){
