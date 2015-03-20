@@ -1,14 +1,13 @@
 package br.com.ferreiraz.fullcamera;
 
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ProgressBar;
 
-public class ProgressBarAnimation extends Animation{
+public class ProgressBarAnimation extends Animation {
     private ProgressBar progressBar;
     private float from;
-    private float  to;
+    private float to;
 
     public ProgressBarAnimation(ProgressBar progressBar, float from, float to) {
         super();

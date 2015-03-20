@@ -1,13 +1,11 @@
 package br.com.ferreiraz.fullcamera;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.hardware.Camera;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.DisplayMetrics;

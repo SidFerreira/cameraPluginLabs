@@ -1,17 +1,10 @@
 package br.com.ferreiraz.fullcamera;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
-import com.learnncode.mediachooser.MediaChooserConstants;
 import com.learnncode.mediachooser.MediaModel;
-import com.learnncode.mediachooser.adapter.GridViewAdapter;
 import com.learnncode.mediachooser.fragment.ImageFragment;
-
-import java.io.File;
 
 public class ImageFragmentFC extends ImageFragment {
 
@@ -29,7 +22,7 @@ public class ImageFragmentFC extends ImageFragment {
 
                 if (galleryModel.status) {
                     mSelectedItems.add(galleryModel.url.toString());
-                }else{
+                } else {
                     mSelectedItems.remove(galleryModel.url.toString().trim());
                 }
 
@@ -46,7 +39,7 @@ public class ImageFragmentFC extends ImageFragment {
     }
 
     public void clearSelection() {
-        for(MediaModel mediaModel : mGalleryModelList) {
+        for (MediaModel mediaModel : mGalleryModelList) {
             mediaModel.status = false;
         }
         mImageAdapter.notifyDataSetChanged();
